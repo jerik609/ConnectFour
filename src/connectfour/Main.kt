@@ -2,17 +2,22 @@ package connectfour
 
 import java.util.Scanner
 
+const val PLAYER_SYMBOL_O = 'o'
+const val PLAYER_SYMBOL_ASTERISK = '*'
+
 fun main() {
     val scanner = Scanner(System.`in`)
 
     println("Connect Four")
 
-    val playerOne = getPlayerName(scanner, "First player's name:")
-    val playerTwo = getPlayerName(scanner, "Second player's name:")
+    val playerOne = Player(getPlayerName(scanner, "First player's name:"), PLAYER_SYMBOL_O)
+    val playerTwo = Player(getPlayerName(scanner, "Second player's name:"), PLAYER_SYMBOL_ASTERISK)
+
     val boardSize = getBoardSize(scanner)
+    val numberOfGames = getNumberOfGames(scanner)
 
     // for developer's convenience, the board is represented as (column, row) internally
     val gameBoard = MutableList(boardSize.first) { MutableList(boardSize.second) { EMPTY_FIELD } }
 
-    playTheGame(Pair(playerOne, PLAYER_ONE_SYMBOL), Pair(playerTwo, PLAYER_TWO_SYMBOL), gameBoard)
+    playTheGame(Game(numberOfGames, playerOne, playerTwo), gameBoard)
 }

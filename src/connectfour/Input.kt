@@ -41,10 +41,34 @@ fun getBoardSize(scanner: Scanner): Pair<Int, Int> {
     return boardSize
 }
 
-fun getMove(currentPlayer: Pair<String, Char>, gameBoard: MutableList<MutableList<Char>>): Int {
+fun getNumberOfGames(scanner: Scanner): Int {
+    var numberOfGames = 0
+    do {
+        println("Do you want to play single or multiple games?")
+        println("For a single game, input 1 or press Enter")
+        println("Input a number of games:")
+        val numberOfGamesStr = scanner.nextLine().lowercase()
+
+        if (numberOfGamesStr == "") {
+            numberOfGames = 1
+            continue
+        }
+
+        val candidate = numberOfGamesStr.trim().toIntOrNull()
+        if (candidate == null || candidate < 1) {
+            println("Invalid input")
+        } else {
+            numberOfGames = candidate
+        }
+
+    } while (numberOfGames == 0)
+    return numberOfGames
+}
+
+fun getMove(currentPlayer: Player, gameBoard: MutableList<MutableList<Char>>): Int {
     var value: Int = -1
     do {
-        println("${currentPlayer.first}'s turn:")
+        println("${currentPlayer.name}'s turn:")
 
         val input = readln()
         if (input == "end") {

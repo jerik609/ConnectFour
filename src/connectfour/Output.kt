@@ -33,11 +33,13 @@ fun printBoard(gameBoard: MutableList<MutableList<Char>>,) {
 }
 
 fun displayGameState(
-    playerOne: Pair<String, Char>,
-    playerTwo: Pair<String, Char>,
+    playerOne: Player,
+    playerTwo: Player,
+    game: Game,
     gameBoard: MutableList<MutableList<Char>>,
 ) {
-    println("${playerOne.first} VS ${playerTwo.first}")
+    println("${playerOne.name} VS ${playerTwo.name}")
     println("${gameBoard[0].size} X ${gameBoard.size} board")
+    println (if (game.gamesLeft() == 1) "Single game" else "Total ${game.gamesLeft()} games\nGame #${game.currentGameNo()}" )
     printBoard(gameBoard)
 }
